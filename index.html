@@ -1,0 +1,2371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>OBISL Campus | CPCS Module 01 — Business-Focused Psychology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Sinhala:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-deep: #0B0F19;
+      --bg-panel: #111827;
+      --bg-card: #1E293B;
+      --border-subtle: rgba(148, 163, 184, 0.18);
+      --border-glow: rgba(56, 189, 248, 0.45);
+      --text-primary: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --accent-sky: #38BDF8;
+      --accent-emerald: #10B981;
+      --accent-amber: #F59E0B;
+      --accent-rose: #F43F5E;
+      --accent-purple: #A855F7;
+      --font-en: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-si: 'Noto Sans Sinhala', 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100dvh;
+      overflow: hidden;
+      background-color: var(--bg-deep);
+      color: var(--text-primary);
+      font-family: var(--font-en);
+      user-select: none;
+    }
+
+    body.lang-si {
+      font-family: var(--font-si);
+      line-height: 1.45;
+    }
+
+    /* Root App Shell */
+    .app-shell {
+      display: grid;
+      width: 100%;
+      height: 100dvh;
+      overflow: hidden;
+    }
+
+    /* Fixed Top Header */
+    .top-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      background: linear-gradient(180deg, #131B2E 0%, #0D1322 100%);
+      border-bottom: 1px solid var(--border-subtle);
+      z-index: 20;
+      gap: 8px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .brand-badge {
+      background: linear-gradient(135deg, #0284C7, #38BDF8);
+      color: #0B0F19;
+      font-weight: 800;
+      font-size: 0.72rem;
+      padding: 4px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .module-tag {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .xp-chip {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(245, 158, 11, 0.14);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #FCD34D;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 999px;
+    }
+
+    .badge-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(30, 41, 59, 0.9);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 5px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: inherit;
+    }
+
+    .badge-btn.unlocked {
+      background: rgba(16, 185, 129, 0.2);
+      border-color: var(--accent-emerald);
+      color: #6EE7B7;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.45);
+      animation: pulseEmerald 2s infinite;
+    }
+
+    @keyframes pulseEmerald {
+      0%, 100% { box-shadow: 0 0 10px rgba(16, 185, 129, 0.4); }
+      50% { box-shadow: 0 0 22px rgba(16, 185, 129, 0.85); }
+    }
+
+    .lang-btn {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: var(--accent-sky);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 5px 9px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+      font-family: inherit;
+      white-space: nowrap;
+    }
+
+    .lang-btn:hover {
+      background: rgba(56, 189, 248, 0.24);
+    }
+
+    /* Stage Progress Pill Bar */
+    .stage-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      padding: 0 12px;
+      background: #0E1424;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .stage-pill {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      height: 30px;
+      border-radius: 999px;
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-secondary);
+      font-size: 0.73rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: inherit;
+      padding: 0 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .stage-pill.active {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: var(--accent-sky);
+      color: #E0F2FE;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
+    }
+
+    .stage-pill.completed {
+      background: rgba(16, 185, 129, 0.16);
+      border-color: rgba(16, 185, 129, 0.6);
+      color: #6EE7B7;
+    }
+
+    /* Canvas Arena */
+    .canvas-arena {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 45%, #152038 0%, #0B0F19 100%);
+      overflow: hidden;
+    }
+
+    #gameCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      touch-action: none;
+    }
+
+    /* Tap-to-Start & Victory Overlays inside Arena */
+    .arena-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(11, 15, 25, 0.84);
+      backdrop-filter: blur(6px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 18px;
+      z-index: 10;
+      transition: opacity 0.25s ease;
+    }
+
+    .arena-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .overlay-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-sky);
+      margin-bottom: 6px;
+    }
+
+    .overlay-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+      max-width: 440px;
+    }
+
+    .overlay-desc {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      max-width: 420px;
+      margin-bottom: 16px;
+      line-height: 1.45;
+    }
+
+    .primary-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #0EA5E9, #2563EB);
+      color: #FFFFFF;
+      font-size: 0.92rem;
+      font-weight: 700;
+      padding: 11px 22px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(14, 165, 233, 0.35);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      font-family: inherit;
+    }
+
+    .primary-cta:active {
+      transform: scale(0.97);
+    }
+
+    .primary-cta.emerald {
+      background: linear-gradient(135deg, #10B981, #059669);
+      box-shadow: 0 8px 20px rgba(16, 185, 129, 0.35);
+    }
+
+    /* Mission & Theory Panel */
+    .info-panel {
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-panel);
+      overflow-y: auto;
+      padding: 12px 14px;
+      gap: 10px;
+      user-select: text;
+    }
+
+    .mission-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .mission-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .archetype-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent-amber);
+      background: rgba(245, 158, 11, 0.14);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    .status-pill {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 6px;
+      background: rgba(148, 163, 184, 0.15);
+      color: var(--text-secondary);
+    }
+
+    .status-pill.solved {
+      background: rgba(16, 185, 129, 0.18);
+      color: #6EE7B7;
+    }
+
+    .mission-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+    }
+
+    .mission-text {
+      font-size: 0.82rem;
+      color: #CBD5E1;
+      line-height: 1.48;
+    }
+
+    .control-hint {
+      margin-top: 8px;
+      padding: 7px 10px;
+      background: rgba(56, 189, 248, 0.08);
+      border-left: 3px solid var(--accent-sky);
+      border-radius: 6px;
+      font-size: 0.76rem;
+      color: #BAE6FD;
+    }
+
+    .action-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .secondary-btn {
+      flex: 1;
+      min-width: 110px;
+      background: rgba(30, 41, 59, 0.95);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      font-family: inherit;
+    }
+
+    .secondary-btn:hover {
+      border-color: var(--accent-sky);
+      background: rgba(56, 189, 248, 0.12);
+    }
+
+    /* Expandable Theory Vault */
+    .theory-vault {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .vault-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: rgba(15, 23, 42, 0.6);
+      border: none;
+      color: var(--accent-sky);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      text-align: left;
+    }
+
+    .vault-content {
+      padding: 12px;
+      font-size: 0.8rem;
+      color: #CBD5E1;
+      line-height: 1.5;
+      border-top: 1px solid var(--border-subtle);
+      display: none;
+    }
+
+    .vault-content.open {
+      display: block;
+    }
+
+    .vault-formula {
+      background: rgba(11, 15, 25, 0.75);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 8px;
+      padding: 8px 10px;
+      margin: 8px 0;
+      font-weight: 700;
+      color: #7DD3FC;
+      font-size: 0.78rem;
+    }
+
+    .vault-case {
+      background: rgba(16, 185, 129, 0.08);
+      border-left: 3px solid var(--accent-emerald);
+      padding: 7px 10px;
+      border-radius: 6px;
+      margin-top: 8px;
+      font-size: 0.77rem;
+      color: #D1FAE5;
+    }
+
+    /* Fixed Bottom Footer */
+    .bottom-footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 12px;
+      background: #090D16;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      z-index: 20;
+    }
+
+    /* Mobile Portrait Layout (<900px) */
+    @media (max-width: 899px) {
+      .app-shell {
+        grid-template-rows: 56px 44px 40dvh calc(60dvh - 144px) 44px;
+        grid-template-columns: 100%;
+      }
+      .top-header { grid-row: 1; }
+      .stage-bar { grid-row: 2; }
+      .canvas-arena { grid-row: 3; border-bottom: 1px solid var(--border-subtle); }
+      .info-panel { grid-row: 4; }
+      .bottom-footer { grid-row: 5; }
+      .module-tag { display: none; }
+    }
+
+    /* Desktop Widescreen Layout (>=900px) */
+    @media (min-width: 900px) {
+      .app-shell {
+        grid-template-rows: 60px 1fr 44px;
+        grid-template-columns: 58% 42%;
+      }
+      .top-header {
+        grid-row: 1;
+        grid-column: 1 / -1;
+      }
+      .canvas-arena {
+        grid-row: 2;
+        grid-column: 1;
+        border-right: 1px solid var(--border-subtle);
+      }
+      .right-dock {
+        grid-row: 2;
+        grid-column: 2;
+        display: flex !important;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
+        background: var(--bg-panel);
+      }
+      .stage-bar {
+        height: 48px;
+        flex-shrink: 0;
+      }
+      .info-panel {
+        flex: 1;
+        padding: 16px;
+        gap: 12px;
+        justify-content: space-between;
+      }
+      .bottom-footer {
+        grid-row: 3;
+        grid-column: 1 / -1;
+      }
+    }
+
+    /* Compact Live Progress Summary Card */
+    .progress-summary-card {
+      background: rgba(15, 23, 42, 0.72);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      margin-top: auto;
+    }
+
+    .progress-summary-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 7px;
+      background: #0B0F19;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.16);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #38BDF8, #10B981);
+      border-radius: 999px;
+      transition: width 0.35s ease;
+    }
+
+    /* Mastery Badge Modal */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 8, 17, 0.88);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
+    }
+
+    .modal-backdrop.hidden {
+      display: none;
+    }
+
+    .modal-card {
+      background: #111827;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 18px;
+      max-width: 560px;
+      width: 100%;
+      max-height: 92dvh;
+      overflow-y: auto;
+      padding: 20px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
+      text-align: center;
+    }
+
+    .certificate-frame {
+      background: linear-gradient(145deg, #0F172A 0%, #1E293B 100%);
+      border: 2px solid #F59E0B;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .cert-org {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: #FCD34D;
+      text-transform: uppercase;
+    }
+
+    .cert-tvec {
+      font-size: 0.68rem;
+      color: #94A3B8;
+      margin-bottom: 10px;
+    }
+
+    .cert-student-name {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #38BDF8;
+      margin: 8px 0;
+      border-bottom: 1px dashed rgba(56, 189, 248, 0.45);
+      padding-bottom: 4px;
+    }
+
+    .cert-meta {
+      display: flex;
+      justify-content: space-around;
+      gap: 8px;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(148, 163, 184, 0.2);
+      font-size: 0.74rem;
+      color: #E2E8F0;
+    }
+
+    .cert-sign {
+      margin-top: 12px;
+      font-size: 0.74rem;
+      font-style: italic;
+      color: #CBD5E1;
+    }
+
+    .name-input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(56, 189, 248, 0.45);
+      background: #0B0F19;
+      color: #F8FAFC;
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      font-family: inherit;
+      text-align: center;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Non-blocking Toast Banner (Replaces alert()) */
+    .toast-banner {
+      position: fixed;
+      top: 68px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-16px);
+      background: rgba(15, 23, 42, 0.96);
+      border: 1px solid var(--accent-amber);
+      color: #FDE68A;
+      padding: 9px 16px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 90;
+      max-width: 92vw;
+      text-align: center;
+    }
+
+    .toast-banner.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+      #printableCertificate, #printableCertificate * {
+        visibility: visible;
+      }
+      #printableCertificate {
+        position: fixed;
+        inset: 0;
+        background: #FFFFFF !important;
+        color: #0F172A !important;
+        border: 4px double #0F172A !important;
+        padding: 36px !important;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      #printableCertificate .cert-org,
+      #printableCertificate .cert-tvec,
+      #printableCertificate .cert-student-name,
+      #printableCertificate .cert-meta,
+      #printableCertificate .cert-sign,
+      #printableCertificate p,
+      #printableCertificate h3 {
+        color: #0F172A !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Fixed Top Header -->
+    <header class="top-header">
+      <div class="brand-group">
+        <span class="brand-badge" id="uiBrandBadge">OBISL Gamified Learning</span>
+        <span class="module-tag" id="uiModuleTag">CPCS • Module 01: Business-Focused Psychology</span>
+      </div>
+      <div class="header-actions">
+        <div class="xp-chip">⚡ <span id="uiXpValue">0</span> XP</div>
+        <button class="badge-btn" id="uiBadgeBtn" title="Complete all 4 activities to unlock your Mastery Badge">
+          🏆 <span id="uiBadgeText">0/4</span>
+        </button>
+        <button class="lang-btn" id="uiLangToggle">ENG | සිංහල</button>
+      </div>
+    </header>
+
+    <!-- Interactive Game Canvas Arena -->
+    <main class="canvas-arena" id="canvasArena">
+      <canvas id="gameCanvas"></canvas>
+
+      <!-- Start Activity Gate Overlay -->
+      <div class="arena-overlay" id="startOverlay">
+        <div class="overlay-eyebrow" id="ovEyebrow">STAGE 1 OF 4</div>
+        <h2 class="overlay-title" id="ovTitle">Herzberg's Two-Factor Sorter</h2>
+        <p class="overlay-desc" id="ovDesc">Classify workplace drivers into Hygiene Factors vs. Intrinsic Motivators.</p>
+        <button class="primary-cta" id="startActivityBtn">▶ Start Activity</button>
+      </div>
+
+      <!-- Stage Complete Overlay -->
+      <div class="arena-overlay hidden" id="winOverlay">
+        <div class="overlay-eyebrow" style="color:#10B981;" id="winEyebrow">STAGE CLEARED • +100 XP</div>
+        <h2 class="overlay-title" id="winTitle">Psychological Alignment Achieved!</h2>
+        <p class="overlay-desc" id="winDesc">You have mastered this core framework.</p>
+        <button class="primary-cta emerald" id="nextStageBtn">Next Stage →</button>
+      </div>
+    </main>
+
+    <!-- Right Dock (Desktop) / Stacked Controls (Mobile) -->
+    <div class="right-dock" style="display:contents;">
+      <!-- 4-Stage Progress Pill Bar -->
+      <nav class="stage-bar" id="stageBar">
+        <button class="stage-pill active" data-stage="0">1. <span class="pill-label">Herzberg</span></button>
+        <button class="stage-pill" data-stage="1">2. <span class="pill-label">VIE Engine</span></button>
+        <button class="stage-pill" data-stage="2">3. <span class="pill-label">BPEA Loop</span></button>
+        <button class="stage-pill" data-stage="3">4. <span class="pill-label">Apex Crisis</span></button>
+      </nav>
+
+      <!-- Scrollable Mission & Theory Card -->
+      <section class="info-panel">
+        <div class="mission-card">
+          <div class="mission-header">
+            <span class="archetype-tag" id="uiArchetype">Dual-Core Magnetic Sorter</span>
+            <span class="status-pill" id="uiStageStatus">Stage 1/4 • Active</span>
+          </div>
+          <h1 class="mission-title" id="uiMissionTitle">Herzberg's Two-Factor Sorter</h1>
+          <p class="mission-text" id="uiMissionDesc"></p>
+          <div class="control-hint" id="uiControlHint"></div>
+        </div>
+
+        <div class="action-row">
+          <button class="secondary-btn" id="resetStageBtn">↻ Reset Simulation</button>
+          <button class="secondary-btn" id="openBadgeQuickBtn" style="display:none; border-color:#10B981; color:#6EE7B7;">🏆 Claim Mastery Badge</button>
+        </div>
+
+        <div class="theory-vault">
+          <button class="vault-toggle" id="vaultToggleBtn">
+            <span id="uiVaultTitle">📖 Theory & Formula Deep-Dive</span>
+            <span id="vaultArrow">▼</span>
+          </button>
+          <div class="vault-content" id="vaultContent">
+            <div id="uiVaultBody"></div>
+            <div class="vault-formula" id="uiVaultFormula"></div>
+            <div class="vault-case" id="uiVaultCase"></div>
+          </div>
+        </div>
+
+        <div class="progress-summary-card">
+          <div class="progress-summary-top">
+            <span id="uiMasteryProgressLbl">Module Mastery Progress</span>
+            <span id="uiMasteryProgressVal" style="color:#38BDF8;">0 / 4 Completed (0%)</span>
+          </div>
+          <div class="progress-track">
+            <div class="progress-fill" id="uiMasteryProgressBar"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Fixed Bottom Attribution Footer -->
+  <footer class="bottom-footer" id="uiFooter">
+    OBISL Campus | Concept by Michael Ranuka Gamage | CPCS (TVEC Approved P12/0245)
+  </footer>
+  </div>
+
+  <!-- Non-blocking Toast Notification -->
+  <div class="toast-banner" id="toastBanner"></div>
+
+  <!-- Unlockable Mastery Badge Modal -->
+  <div class="modal-backdrop hidden" id="badgeModal">
+    <div class="modal-card">
+      <div class="certificate-frame" id="printableCertificate">
+        <div class="cert-org">OCEAN BRIDGE INTERNATIONAL FOR SKILLS & LEARNING (OBISL)</div>
+        <div class="cert-tvec" id="certTvec">TVEC Approved Institution (P12/0245) • Official Mastery Credential</div>
+        <svg width="74" height="74" viewBox="0 0 100 100" style="margin:6px auto; display:block;">
+          <defs>
+            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FDE68A" />
+              <stop offset="50%" stop-color="#F59E0B" />
+              <stop offset="100%" stop-color="#B45309" />
+            </linearGradient>
+          </defs>
+          <circle cx="50" cy="50" r="45" fill="none" stroke="url(#goldGrad)" stroke-width="4" stroke-dasharray="6 3"/>
+          <circle cx="50" cy="50" r="36" fill="#0F172A" stroke="#38BDF8" stroke-width="2.5"/>
+          <polygon points="50,22 57,38 75,40 61,52 65,70 50,60 35,70 39,52 25,40 43,38" fill="url(#goldGrad)"/>
+        </svg>
+        <p style="font-size:0.78rem; color:#94A3B8;" id="certAwardedTo">This Digital Mastery Badge is awarded to</p>
+        <div class="cert-student-name" id="certDisplayName">OBISL Scholar</div>
+        <h3 style="font-size:0.98rem; color:#F8FAFC; margin:6px 0;" id="certModuleName">CPCS Module 01: Introduction to Business-Focused Psychology</h3>
+        <div class="cert-meta">
+          <span><strong id="certTrackLbl">Course:</strong> CPCS</span>
+          <span><strong id="certScoreLbl">Score:</strong> <span id="certFinalXp">400</span> XP</span>
+          <span><strong id="certDateLbl">Date:</strong> <span id="certDateVal"></span></span>
+        </div>
+        <div class="cert-sign" id="certSignature">
+          "Bridging human psychological architecture with ethical commercial excellence."<br/>
+          <strong>— Michael Ranuka Gamage, Director — Ocean Bridge International (OBISL)</strong>
+        </div>
+      </div>
+
+      <input type="text" id="studentNameInput" class="name-input" placeholder="Enter Student Name / ශිෂ්‍යයාගේ නම ඇතුළත් කරන්න" maxlength="42" />
+      <div class="modal-actions">
+        <button class="primary-cta emerald" id="printBadgeBtn">🖨️ Print / Save Badge PDF</button>
+        <button class="secondary-btn" id="closeModalBtn" style="max-width:140px;">✕ Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================================================
+       1. TOP-LEVEL STATE & DICTIONARY INITIALIZATION (ZERO TDZ ERRORS)
+       ========================================================================= */
+    const COLORS = {
+      bgDeep: '#0B0F19',
+      bgCard: '#1E293B',
+      sky: '#38BDF8',
+      emerald: '#10B981',
+      amber: '#F59E0B',
+      rose: '#F43F5E',
+      purple: '#A855F7',
+      textLight: '#F8FAFC',
+      textMuted: '#94A3B8',
+      slateBorder: '#334155'
+    };
+
+    const I18N = {
+      en: {
+        brandBadge: 'OBISL Gamified Learning',
+        moduleTag: 'CPCS • Module 01: Business-Focused Psychology',
+        footer: 'OBISL Campus | Concept by Michael Ranuka Gamage | CPCS (TVEC Approved P12/0245)',
+        langBtn: 'ENG | සිංහල',
+        badgeTooltipLocked: 'Complete all 4 activities to unlock your Mastery Badge',
+        badgeTooltipUnlocked: 'Click to view & print your OBISL Mastery Badge!',
+        startBtn: '▶ Start Activity',
+        nextBtn: 'Next Stage →',
+        claimBtn: '🏆 Claim Mastery Badge',
+        resetBtn: '↻ Reset Simulation',
+        vaultTitle: '📖 Theory & Formula Deep-Dive',
+        masteryProgressLbl: 'Module Mastery Progress',
+        masteryProgressVal: (done) => `${done} / 4 Completed (${done * 25}%)`,
+        stageOf: (n) => `STAGE ${n} OF 4`,
+        statusActive: (n) => `Stage ${n}/4 • Active`,
+        statusSolved: (n) => `Stage ${n}/4 • Mastered ✓`,
+        winEyebrow: 'STAGE CLEARED • +100 XP',
+        winTitle: 'Psychological Alignment Achieved!',
+        pills: ['1. Herzberg', '2. VIE Engine', '3. BPEA Loop', '4. Apex Crisis'],
+        certTvec: 'TVEC Approved Institution (P12/0245) • Official Mastery Credential',
+        certAwardedTo: 'This Digital Mastery Badge is awarded to',
+        certModuleName: 'CPCS Module 01: Introduction to Business-Focused Psychology',
+        certTrackLbl: 'Track:',
+        certScoreLbl: 'Score:',
+        certDateLbl: 'Date:',
+        namePlaceholder: 'Enter Student Name to personalize badge...',
+        printBtn: '🖨️ Print / Save Badge PDF',
+        closeBtn: '✕ Close',
+        stages: [
+          {
+            archetype: 'Dual-Core Magnetic Sorter',
+            title: "Herzberg's Two-Factor Sorter",
+            overlayDesc: 'Sort workplace energy orbs into Hygiene Factors (prevent dissatisfaction) vs. Intrinsic Motivators (drive engagement).',
+            missionDesc: 'According to Frederick Herzberg, extrinsic hygiene conditions neutralize dissatisfaction, whereas intrinsic motivators embedded in the job fuel high performance. Route all 6 workplace factors into their proper containment bays.',
+            controlHint: 'Drag each orb into its matching bay — OR tap an orb to select it, then tap the target bay.',
+            winDesc: 'You cleanly separated baseline Hygiene Factors from true Intrinsic Motivators!',
+            vaultBody: 'Herzberg’s Two-Factor (Motivation-Hygiene) Theory proves that dissatisfaction and motivation are separate continua. Fixing pay or workspace conditions removes frustration, but sustained discretionary effort requires Autonomy, Achievement, and Recognition.',
+            vaultFormula: 'Efficiency Multiplier = Employee Ability × Psychological Motivation × Organizational Opportunity',
+            vaultCase: 'OBISL Industry Case: A regional public health directorate reduced absenteeism from 22% to 11% without pay raises by fixing workstation hygiene first, then activating peer recognition and scheduling autonomy.',
+            leftBay: 'HYGIENE FACTORS',
+            leftSub: 'Prevents Dissatisfaction',
+            rightBay: 'MOTIVATORS',
+            rightSub: 'Fuels Intrinsic Drive',
+            comboLbl: 'COMBO',
+            stabilityLbl: 'STABILITY',
+            items: [
+              { id: 'h1', label: 'Base Salary', bay: 'left' },
+              { id: 'm1', label: 'Job Autonomy', bay: 'right' },
+              { id: 'h2', label: 'Job Security', bay: 'left' },
+              { id: 'm2', label: 'Achievement', bay: 'right' },
+              { id: 'h3', label: 'Office Policy', bay: 'left' },
+              { id: 'm3', label: 'Recognition', bay: 'right' }
+            ]
+          },
+          {
+            archetype: 'Live Plasma Resonance Reactor',
+            title: "Vroom's Expectancy (VIE) Reactor",
+            overlayDesc: 'Stabilize the fluctuating VIE plasma core inside the Emerald Resonance Zone (70–90%) until charge hits 100%!',
+            missionDesc: 'Victor Vroom’s VIE Model states that rational work effort collapses if any cognitive link weakens (M = E × I × V). Counteract real-time workplace drift on all 3 sliders to lock the plasma core in the Emerald Resonance Zone and charge the reactor!',
+            controlHint: 'Drag or tap the 3 sliders to keep Force inside 70%–90% while the Capacitor charges to 100%.',
+            winDesc: 'Optimal Expectancy, transparent Instrumentality, and high Valence locked at 100% resonance!',
+            vaultBody: 'In Vroom’s Expectancy Theory, employees evaluate three sequential questions: (1) Will effort yield performance? (Expectancy), (2) Will performance yield promised rewards? (Instrumentality), and (3) Do I value those rewards? (Valence).',
+            vaultFormula: 'Motivational Force (MF) = Expectancy (E) × Instrumentality (I) × Valence (V)',
+            vaultCase: 'OBISL Industry Case: An IT manager’s vague promotion promise failed because low clarity reduced Expectancy and office-politics fears broke Instrumentality.',
+            sliders: [
+              { id: 'exp', name: 'Expectancy (E: Effort → Skill)', sub: 'Training & Role Clarity' },
+              { id: 'ins', name: 'Instrumentality (I: Perf → Reward)', sub: 'Transparent Bonus Governance' },
+              { id: 'val', name: 'Valence (V: Value of Reward)', sub: 'Meaningful Career Growth' }
+            ],
+            gaugeLabel: 'PLASMA FORCE',
+            chargeLabel: 'REACTOR CHARGE',
+            zoneHint: 'Lock Zone: 70%–90%'
+          },
+          {
+            archetype: 'High-Voltage Circuit Overdrive',
+            title: 'BPEA Diagnostic Pipeline',
+            overlayDesc: 'Snap the 4 live BPEA diagnostic cores into Sockets #1–#4 to route high-voltage energy across the closed loop!',
+            missionDesc: 'Instead of blaming low output on "bad attitudes," practitioners diagnose performance across 4 sequential stages. Lock the pulsing BPEA modules into Sockets 1 through 4 to fire the arc-energy loop.',
+            controlHint: 'Drag each glowing module into Sockets #1–#4 — OR tap a module and tap its matching numbered socket.',
+            winDesc: 'BPEA Closed-Loop Diagnostic Circuit energized at full voltage!',
+            vaultBody: 'The Business Psychology Efficiency Architecture (BPEA) systematically isolates whether performance friction stems from individual cognitive biases (Stage 1), job/reward design (Stage 2), operational flow (Stage 3), or missing feedback audits (Stage 4).',
+            vaultFormula: 'Stage 1 (Foundations) → Stage 2 (Motivational Engine) → Stage 3 (Value Outputs) → Stage 4 (Diagnostic Loop)',
+            vaultCase: 'OBISL Industry Case: A 450-seat commercial bank cut loan turnaround by 27% and errors by 41% after diagnosing micro-batching autonomy loss via BPEA.',
+            circuitLbl: 'LOOP INTEGRITY',
+            nodes: [
+              { step: 1, title: 'Behavioural Foundations', sub: 'Perception, Biases & Big Five' },
+              { step: 2, title: 'Motivational Engine', sub: 'Autonomy, Equity & VIE Links' },
+              { step: 3, title: 'Efficiency Outputs', sub: 'Flow, Quality & Retention' },
+              { step: 4, title: 'Diagnostic Feedback', sub: '360 Audits & Counselling Loop' }
+            ]
+          },
+          {
+            archetype: 'Real-Time Warehouse Defense',
+            title: 'Apex Ceylon Logistics Turnaround',
+            overlayDesc: 'Defend the cold-chain floor from incoming crisis waves! Deploy HR Lead Kasun Silva’s ethical reforms to hit all 3 KPIs.',
+            missionDesc: 'Punitive fines at Apex Ceylon Logistics triggered threat rigidity and damaged parcels dropping down the chute! Tap the 3 tactical action buttons below to intercept incoming hazards and boost Safety ≥75%, Quality ≥80%, and Equity ≥75%.',
+            controlHint: 'Tap the 3 tactical intervention buttons at the bottom (recharges live!) to neutralize falling parcel crises & boost KPIs.',
+            winDesc: 'Crisis wave defeated! You eliminated threat rigidity and restored ethical high performance at ACL.',
+            vaultBody: 'Kerr’s Folly ("Rewarding A while hoping for B") occurs when speed quotas paired with punitive fines induce threat rigidity and error concealment. Amy Edmondson’s Psychological Safety + High Accountability creates the High-Performance Learning Zone.',
+            vaultFormula: 'Sustainable Performance = Psychological Safety (≥75%) + Task-Weighted Equity (≥75%) + Quality Gate (≥80%)',
+            vaultCase: 'OBISL Case Study: Suspending punitive zone deductions, weighting day/night pharma vs. pallet shifts, and gating bonuses on accuracy cuts returns by 60%.',
+            budgetLbl: 'ENERGY',
+            kpis: [
+              { id: 'safety', name: 'Psych Safety', target: 75 },
+              { id: 'quality', name: 'Cold-Chain Quality', target: 80 },
+              { id: 'equity', name: 'Shift Equity', target: 75 }
+            ],
+            levers: [
+              { id: 'l1', title: 'No-Blame Alert', sub: '+Safety & +Quality', cost: 25 },
+              { id: 'l2', title: 'Shift Balancer', sub: '+Equity & +Safety', cost: 25 },
+              { id: 'l3', title: 'Quality Gate', sub: '+Quality & +Equity', cost: 20 }
+            ]
+          }
+        ]
+      },
+      si: {
+        brandBadge: 'OBISL අන්තර්ක්‍රියාකාරී ඉගෙනුම',
+        moduleTag: 'CPCS • මොඩියුලය 01: ව්‍යාපාර කේන්ද්‍රීය මනෝවිද්‍යාව',
+        footer: 'OBISL Campus | සංකල්පය: Michael Ranuka Gamage | CPCS (TVEC අනුමත P12/0245)',
+        langBtn: 'ENG | සිංහල',
+        badgeTooltipLocked: 'නිපුණතා පදක්කම ලබා ගැනීමට ක්‍රියාකාරකම් 4ම සම්පූර්ණ කරන්න',
+        badgeTooltipUnlocked: 'ඔබගේ OBISL නිපුණතා පදක්කම බැලීමට සහ මුද්‍රණය කිරීමට ක්ලික් කරන්න!',
+        startBtn: '▶ ක්‍රියාකාරකම අරඹන්න',
+        nextBtn: 'ඊළඟ අදියර →',
+        claimBtn: '🏆 නිපුණතා පදක්කම ලබාගන්න',
+        resetBtn: '↻ නැවත අරඹන්න',
+        vaultTitle: '📖 න්‍යායාත්මක විග්‍රහය සහ සූත්‍ර',
+        masteryProgressLbl: 'මොඩියුල ප්‍රගතිය',
+        masteryProgressVal: (done) => `${done} / 4 සම්පූර්ණයි (${done * 25}%)`,
+        stageOf: (n) => `අදියර ${n} / 4`,
+        statusActive: (n) => `අදියර ${n}/4 • ක්‍රියාත්මකයි`,
+        statusSolved: (n) => `අදියර ${n}/4 • සම්පූර්ණයි ✓`,
+        winEyebrow: 'අදියර සම්පූර්ණයි • +100 XP',
+        winTitle: 'මනෝවිද්‍යාත්මක සමතුලිතතාවය සාර්ථකයි!',
+        pills: ['1. හර්ස්බර්ග්', '2. අපේක්ෂා න්‍යාය', '3. BPEA ව්‍යුහය', '4. ඇපෙක්ස් අර්බුදය'],
+        certTvec: 'TVEC අනුමත ආයතනය (P12/0245) • නිල නිපුණතා සහතිකය',
+        certAwardedTo: 'මෙම ඩිජිටල් නිපුණතා පදක්කම පිරිනමනු ලබන්නේ',
+        certModuleName: 'CPCS මොඩියුලය 01: ව්‍යාපාර කේන්ද්‍රීය මනෝවිද්‍යාව හැඳින්වීම',
+        certTrackLbl: 'පාඨමාලාව:',
+        certScoreLbl: 'ලකුණු:',
+        certDateLbl: 'දිනය:',
+        namePlaceholder: 'ඔබගේ නම ඇතුළත් කරන්න...',
+        printBtn: '🖨️ පදක්කම මුද්‍රණය / PDF',
+        closeBtn: '✕ වසන්න',
+        stages: [
+          {
+            archetype: 'ද්විත්ව චුම්භක වර්ගීකරණය',
+            title: 'හර්ස්බර්ග්ගේ ද්වි-සාධක වර්ගීකරණය',
+            overlayDesc: 'සේවා ස්ථාන සාධක "සනීපාරක්ෂක සාධක" (Hygiene) සහ "අභ්‍යන්තර අභිප්‍රේරක" (Motivators) ලෙස වෙන් කරන්න.',
+            missionDesc: 'ෆ්‍රෙඩ්රික් හර්ස්බර්ග්ට අනුව සනීපාරක්ෂක සාධක අතෘප්තිය වළක්වන අතර, රැකියාව තුළ ඇති අභ්‍යන්තර අභිප්‍රේරක ඉහළ කාර්යසාධනයක් ඇති කරයි. සාධක 6 නිවැරදි කුටීරවලට යොමු කරන්න.',
+            controlHint: 'සාධක ඇදගෙන ගොස් අදාළ කුටීරයට දමන්න — නැතහොත් සාධකය තට්ටු කර (Tap) කුටීරය තට්ටු කරන්න.',
+            winDesc: 'ඔබ සනීපාරක්ෂක සාධක සහ අභ්‍යන්තර අභිප්‍රේරක නිවැරදිව වෙන්කර හඳුනා ගත්තා!',
+            vaultBody: 'හර්ස්බර්ග්ගේ ද්වි-සාධක න්‍යායට අනුව වැටුප් සහ සේවා පරිසරය අතෘප්තිය උදාසීන කරයි. නමුත් සැබෑ කැපවීම ඇති වන්නේ ස්වාධීනත්වය, ජයග්‍රහණ සහ පිළිගැනීම තුළිනි.',
+            vaultFormula: 'කාර්යක්ෂමතාව = සේවක හැකියාව × මනෝවිද්‍යාත්මක අභිප්‍රේරණය × ආයතනික අවස්ථාව',
+            vaultCase: 'OBISL ප්‍රායෝගික උදාහරණය: වැටුප් වැඩිවීමකින් තොරව සේවා ස්ථාන පහසුකම් සහ සම-පිළිගැනීම ලබා දීමෙන් රාජ්‍ය සෞඛ්‍ය අංශයේ නොපැමිණීම 22% සිට 11% දක්වා අඩු විය.',
+            leftBay: 'සනීපාරක්ෂක සාධක',
+            leftSub: 'අතෘප්තිය වළක්වයි',
+            rightBay: 'අභිප්‍රේරක සාධක',
+            rightSub: 'අභ්‍යන්තර පෙළඹවීම ඇති කරයි',
+            comboLbl: 'අඛණ්ඩ ජය',
+            stabilityLbl: 'ස්ථායීතාව',
+            items: [
+              { id: 'h1', label: 'මූලික වැටුප', bay: 'left' },
+              { id: 'm1', label: 'ස්වාධීනත්වය', bay: 'right' },
+              { id: 'h2', label: 'රැකියා සුරක්ෂිතභාවය', bay: 'left' },
+              { id: 'm2', label: 'ජයග්‍රහණ', bay: 'right' },
+              { id: 'h3', label: 'ආයතනික ප්‍රතිපත්ති', bay: 'left' },
+              { id: 'm3', label: 'පිළිගැනීම', bay: 'right' }
+            ]
+          },
+          {
+            archetype: 'සජීවී ප්ලාස්මා ප්‍රතික්‍රියාකාරකය',
+            title: 'වෲම්ගේ අපේක්ෂා (VIE) ප්‍රතික්‍රියාකාරකය',
+            overlayDesc: 'ප්‍රතික්‍රියාකාරක ආරෝපණය 100% දක්වා පිරවීමට අපේක්ෂා බලය හරිත කලාපයේ (70–90%) ස්ථාවරව තබා ගන්න!',
+            missionDesc: 'වික්ටර් වෲම්ගේ VIE ආකෘතියට අනුව කිසියම් සබැඳියක් දුර්වල වුවහොත් අභිප්‍රේරණය බිඳ වැටේ. සජීවී විචලනයන් පාලනය කරමින් ස්ලයිඩර 3 හරිත කලාපයේ (70–90%) තබා ධාරිත්‍රකය 100% ආරෝපණය කරන්න.',
+            controlHint: 'ස්ලයිඩර 3 ඇදගෙන යන්න (හෝ තට්ටු කරන්න) — ආරෝපණය 100% වන තුරු බලය 70%–90% අතර තබා ගන්න.',
+            winDesc: 'ප්‍රශස්ත අපේක්ෂාව, විනිවිද පෙනෙන ත්‍යාග සබැඳිය සහ ඉහළ වටිනාකම 100% සමතුලිත විය!',
+            vaultBody: 'වෲම්ගේ න්‍යාය ප්‍රශ්න තුනක් විමසයි: උත්සාහයෙන් කාර්යසාධනය ලැබේද? (Expectancy), කාර්යසාධනයෙන් ත්‍යාග ලැබේද? (Instrumentality), සහ එම ත්‍යාග මට වටීද? (Valence).',
+            vaultFormula: 'අභිප්‍රේරණ බලය (MF) = අපේක්ෂාව (E) × උපකරණීයතාව (I) × වටිනාකම (V)',
+            vaultCase: 'OBISL ප්‍රායෝගික උදාහරණය: අපැහැදිලි උසස්වීම් නිර්ණායක නිසා IT කණ්ඩායමක අපේක්ෂාව සහ විශ්වාසය බිඳ වැටුණි.',
+            sliders: [
+              { id: 'exp', name: 'අපේක්ෂාව (E: උත්සාහය → දක්ෂතාව)', sub: 'පුහුණුව සහ පැහැදිලි ඉලක්ක' },
+              { id: 'ins', name: 'උපකරණීයතාව (I: දක්ෂතාව → ත්‍යාග)', sub: 'විනිවිද පෙනෙන ඇගයීම්' },
+              { id: 'val', name: 'වටිනාකම (V: ත්‍යාගයේ අගය)', sub: 'වෘත්තීය වර්ධන අවස්ථා' }
+            ],
+            gaugeLabel: 'ප්ලාස්මා බලය',
+            chargeLabel: 'ආරෝපණය',
+            zoneHint: 'ඉලක්කය: 70%–90%'
+          },
+          {
+            archetype: 'අධි-වෝල්ටීයතා පරිපථ පෙළගැස්ම',
+            title: 'BPEA රෝග විනිශ්චය පද්ධතිය',
+            overlayDesc: 'සංවෘත-ලූප ශක්ති ධාරාව සක්‍රීය කිරීමට BPEA මොඩියුල 4 නිවැරදි #1–#4 කෙවෙනිවලට සවි කරන්න!',
+            missionDesc: 'අඩු ඵලදායිතාව හුදු "ආකල්ප ගැටලුවක්" ලෙස නොසලකා BPEA අදියර 4 හරහා විශ්ලේෂණය කළ යුතුය. #1 සිට #4 දක්වා නිවැරදි කෙවෙනිවලට මොඩියුල සවි කර පරිපථය සම්පූර්ණ කරන්න.',
+            controlHint: 'මොඩියුල ඇදගෙන ගොස් #1–#4 කොටුවලට දමන්න — නැතහොත් මොඩියුලය තට්ටු කර අදාළ කොටුව තට්ටු කරන්න.',
+            winDesc: 'BPEA සංවෘත-ලූප රෝග විනිශ්චය පද්ධතිය පූර්ණ වෝල්ටීයතාවයෙන් සක්‍රීය විය!',
+            vaultBody: 'BPEA රාමුව මගින් කාර්යසාධන බාධා ඇති වන්නේ පුද්ගල ප්‍රජානන මට්ටමින්ද (1), අභිප්‍රේරණ යාන්ත්‍රණයෙන්ද (2), ප්‍රතිදාන මට්ටමින්ද (3), නැතහොත් ප්‍රතිපෝෂණ චක්‍රයෙන්ද (4) යන්න හඳුනා ගනී.',
+            vaultFormula: '1. චර්යාත්මක පදනම් → 2. අභිප්‍රේරණ යාන්ත්‍රණය → 3. කාර්යක්ෂමතා ප්‍රතිදාන → 4. ප්‍රතිපෝෂණ චක්‍රය',
+            vaultCase: 'OBISL ප්‍රායෝගික උදාහරණය: වාණිජ බැංකුවක ණය සැකසුම් කාලය 27% කින් අඩු කර ගැනීමට BPEA රෝග විනිශ්චය උපකාරී විය.',
+            circuitLbl: 'පරිපථ බලය',
+            nodes: [
+              { step: 1, title: 'චර්යාත්මක පදනම්', sub: 'සංජානනය, නැඹුරුතා සහ Big Five' },
+              { step: 2, title: 'අභිප්‍රේරණ යාන්ත්‍රණය', sub: 'ස්වාධීනත්වය, සාධාරණත්වය සහ VIE' },
+              { step: 3, title: 'කාර්යක්ෂමතා ප්‍රතිදාන', sub: 'ප්‍රවාහය, ගුණාත්මකභාවය සහ රඳවා ගැනීම' },
+              { step: 4, title: 'රෝග විනිශ්චය චක්‍රය', sub: '360 විගණන සහ උපදේශන ප්‍රතිපෝෂණ' }
+            ]
+          },
+          {
+            archetype: 'සජීවී ගබඩා අර්බුද ආරක්ෂණය',
+            title: 'ඇපෙක්ස් ලොජිස්ටික්ස් (ACL) අර්බුද විසඳුම',
+            overlayDesc: 'පහළට වැටෙන අර්බුද පාර්සල් වළක්වා KPI 3ම ඉලක්කයට ගෙන ඒමට උපායමාර්ගික ප්‍රතිසංස්කරණ ක්‍රියාත්මක කරන්න!',
+            missionDesc: 'ඇපෙක්ස් ලොජිස්ටික්ස් හි දඬුවම් දඩ මුදල් නිසා හානි වූ පාර්සල් ගැටලු ඉහළ ගොස් ඇත. පහළ ඇති උපායමාර්ගික බොත්තම් 3 තට්ටු කර අර්බුද වළක්වමින් KPI 3ම ඉලක්කයට ගෙන එන්න.',
+            controlHint: 'පහළ ඇති බොත්තම් 3 තට්ටු කර වැටෙන පාර්සල් අර්බුද නවත්වන්න (ශක්තිය ස්වයංක්‍රීයව නැවත පිරේ!).',
+            winDesc: 'අර්බුදය විසඳුණි! ඔබ තර්ජන දෘඪතාව ඉවත් කර සදාචාරාත්මක කාර්යසාධනය තහවුරු කළා.',
+            vaultBody: 'දැඩි දඬුවම් සහිත වේග ඉලක්ක මගින් මනෝවිද්‍යාත්මක සුරක්ෂිතභාවය විනාශ වී දෝෂ සැඟවීමට පොළඹවයි. සුරක්ෂිතභාවය සහ ඉහළ වගවීම මගින් ඉහළ කාර්යසාධන කලාපය නිර්මාණය වේ.',
+            vaultFormula: 'තිරසාර කාර්යසාධනය = මනෝවිද්‍යාත්මක සුරක්ෂිතභාවය (≥75%) + සාධාරණත්වය (≥75%) + ගුණාත්මකභාවය (≥80%)',
+            vaultCase: 'OBISL සිද්ධි අධ්‍යයනය: දෝෂ දඩ අත්හිටුවීම සහ සේවා මුර බර තැබීම මගින් භාණ්ඩ ආපසු එවීම් 60% කින් අඩු කර ගත හැක.',
+            budgetLbl: 'ශක්තිය',
+            kpis: [
+              { id: 'safety', name: 'මනෝවිද්‍යාත්මක සුරක්ෂිතභාවය', target: 75 },
+              { id: 'quality', name: 'ශීතාගාර ගුණාත්මකභාවය', target: 80 },
+              { id: 'equity', name: 'සේවා මුර සාධාරණත්වය', target: 75 }
+            ],
+            levers: [
+              { id: 'l1', title: 'දඩ අත්හිටුවීම', sub: '+සුරක්ෂිතභාවය', cost: 25 },
+              { id: 'l2', title: 'සේවා මුර සමතුලිත', sub: '+සාධාරණත්වය', cost: 25 },
+              { id: 'l3', title: 'ගුණාත්මක සීමා', sub: '+ගුණාත්මකභාවය', cost: 20 }
+            ]
+          }
+        ]
+      }
+    };
+
+    const APP_STATE = {
+      lang: 'en',
+      currentStage: 0,
+      solved: [false, false, false, false],
+      started: [false, false, false, false],
+      xp: 0,
+      vaultOpen: false,
+      dpr: Math.min(window.devicePixelRatio || 1, 2),
+      width: 0,
+      height: 0,
+      pointerX: 0,
+      pointerY: 0,
+      isDragging: false,
+      dragTarget: null,
+      selectedItem: null,
+      particles: [],
+      floatingTexts: [],
+      pulseTime: 0,
+      screenShake: 0,
+      // Stage 1 state (Zero-G Magnetic Arena)
+      s1Orbs: [],
+      s1Bays: { left: null, right: null },
+      s1Combo: 0,
+      s1Stability: 100,
+      // Stage 2 state (Live Plasma Resonance Reactor)
+      s2Sliders: [42, 38, 48],
+      s2ActiveSlider: -1,
+      s2Tracks: [],
+      s2Charge: 0,
+      // Stage 3 state (High-Voltage Circuit Overdrive)
+      s3Modules: [],
+      s3Sockets: [],
+      s3PulsePos: 0,
+      // Stage 4 state (Real-Time Warehouse Crisis Defense)
+      s4Kpis: [40, 45, 42],
+      s4Energy: 100,
+      s4Hazards: [],
+      s4SpawnTimer: 0,
+      s4Buttons: []
+    };
+
+    /* =========================================================================
+       2. WEB AUDIO SYNTHESIZER (ZERO EXTERNAL SOUND URLS)
+       ========================================================================= */
+    let audioCtx = null;
+    function playTone(freq, type = 'sine', duration = 0.14, gainVal = 0.08) {
+      try {
+        if (!audioCtx) {
+          const Ctx = window.AudioContext || window.webkitAudioContext;
+          if (Ctx) audioCtx = new Ctx();
+        }
+        if (!audioCtx) return;
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(gainVal, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (err) {
+        // Ignore audio errors on restricted devices
+      }
+    }
+
+    function playSuccessChime() {
+      playTone(523.25, 'triangle', 0.14, 0.09);
+      setTimeout(() => playTone(659.25, 'triangle', 0.16, 0.09), 70);
+      setTimeout(() => playTone(783.99, 'triangle', 0.24, 0.1), 140);
+    }
+
+    function playErrorBuzz() {
+      playTone(165, 'sawtooth', 0.2, 0.07);
+    }
+
+    /* =========================================================================
+       3. DOM REFERENCES & TOAST HELPER
+       ========================================================================= */
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const arenaEl = document.getElementById('canvasArena');
+    const startOverlay = document.getElementById('startOverlay');
+    const winOverlay = document.getElementById('winOverlay');
+    const badgeModal = document.getElementById('badgeModal');
+    const toastBanner = document.getElementById('toastBanner');
+    let toastTimeout = null;
+
+    function showToast(msg) {
+      toastBanner.textContent = msg;
+      toastBanner.classList.add('show');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => toastBanner.classList.remove('show'), 2600);
+    }
+
+    /* =========================================================================
+       4. GAME INITIALIZERS & LAYOUT COMPUTATION
+       ========================================================================= */
+    function initStageState(stageIdx, forceReset = false) {
+      if (stageIdx === 0) {
+        if (APP_STATE.s1Orbs.length === 0 || forceReset) {
+          const items = I18N.en.stages[0].items;
+          const order = [0, 1, 2, 3, 4, 5].sort(() => Math.random() - 0.5);
+          APP_STATE.s1Combo = 0;
+          APP_STATE.s1Stability = 100;
+          APP_STATE.s1Orbs = order.map((idx, i) => ({
+            idx,
+            id: items[idx].id,
+            bay: items[idx].bay,
+            x: 0,
+            y: 0,
+            vx: (Math.random() > 0.5 ? 1 : -1) * (0.55 + Math.random() * 0.45),
+            vy: (Math.random() > 0.5 ? 1 : -1) * (0.45 + Math.random() * 0.4),
+            homeX: 0,
+            homeY: 0,
+            docked: false,
+            shake: 0,
+            slotIndex: i
+          }));
+          APP_STATE.selectedItem = null;
+        }
+        layoutStage1();
+      } else if (stageIdx === 1) {
+        if (forceReset) {
+          APP_STATE.s2Sliders = [42, 38, 48];
+          APP_STATE.s2Charge = 0;
+        }
+        layoutStage2();
+      } else if (stageIdx === 2) {
+        if (APP_STATE.s3Modules.length === 0 || forceReset) {
+          const order = [2, 0, 3, 1];
+          APP_STATE.s3Modules = order.map((stepIdx, i) => ({
+            stepIdx,
+            step: stepIdx + 1,
+            x: 0,
+            y: 0,
+            homeX: 0,
+            homeY: 0,
+            dockedSocket: -1,
+            shake: 0,
+            poolIdx: i
+          }));
+          APP_STATE.selectedItem = null;
+        }
+        layoutStage3();
+      } else if (stageIdx === 3) {
+        if (forceReset) {
+          APP_STATE.s4Kpis = [40, 45, 42];
+          APP_STATE.s4Energy = 100;
+          APP_STATE.s4Hazards = [];
+          APP_STATE.s4SpawnTimer = 0;
+        }
+        layoutStage4();
+      }
+    }
+
+    function layoutStage1() {
+      const w = APP_STATE.width;
+      const h = APP_STATE.height;
+      if (!w || !h) return;
+      const pad = Math.max(12, w * 0.035);
+      const bayW = (w - pad * 3) / 2;
+      const bayH = Math.max(82, h * 0.27);
+      const bayY = h - bayH - pad;
+      APP_STATE.s1Bays.left = { x: pad, y: bayY, w: bayW, h: bayH };
+      APP_STATE.s1Bays.right = { x: pad * 2 + bayW, y: bayY, w: bayW, h: bayH };
+
+      const topAreaH = bayY - pad;
+      const cols = 3;
+      const rows = 2;
+      const cellW = (w - pad * 2) / cols;
+      const cellH = Math.max(48, (topAreaH - 32) / rows);
+
+      APP_STATE.s1Orbs.forEach((orb) => {
+        const c = orb.slotIndex % cols;
+        const r = Math.floor(orb.slotIndex / cols);
+        orb.homeX = pad + cellW * (c + 0.5);
+        orb.homeY = 38 + cellH * (r + 0.5);
+        if (orb.docked) {
+          const targetBay = orb.bay === 'left' ? APP_STATE.s1Bays.left : APP_STATE.s1Bays.right;
+          const dockedInSame = APP_STATE.s1Orbs.filter((o) => o.docked && o.bay === orb.bay);
+          const posIdx = dockedInSame.indexOf(orb);
+          orb.x = targetBay.x + targetBay.w * 0.5;
+          orb.y = targetBay.y + 44 + posIdx * Math.min(22, (targetBay.h - 52) / 3);
+        } else if (orb.x === 0 && orb.y === 0) {
+          orb.x = orb.homeX;
+          orb.y = orb.homeY;
+        }
+      });
+    }
+
+    function layoutStage2() {
+      const w = APP_STATE.width;
+      const h = APP_STATE.height;
+      if (!w || !h) return;
+      const pad = Math.max(16, w * 0.05);
+      const gaugeH = Math.max(86, h * 0.28);
+      const startY = gaugeH + 24;
+      const availH = h - startY - 16;
+      const rowH = availH / 3;
+      APP_STATE.s2Tracks = [0, 1, 2].map((i) => ({
+        x: pad,
+        y: startY + i * rowH + rowH * 0.58,
+        w: w - pad * 2,
+        labelY: startY + i * rowH + rowH * 0.22
+      }));
+    }
+
+    function layoutStage3() {
+      const w = APP_STATE.width;
+      const h = APP_STATE.height;
+      if (!w || !h) return;
+      const pad = Math.max(12, w * 0.03);
+      const isCompact = w < 520;
+
+      if (isCompact) {
+        const colW = (w - pad * 3) / 2;
+        const rowH = Math.max(44, (h - 60) / 4);
+        APP_STATE.s3Sockets = [0, 1, 2, 3].map((i) => ({
+          step: i + 1,
+          x: pad,
+          y: 40 + i * rowH,
+          w: colW,
+          h: rowH - 8
+        }));
+        APP_STATE.s3Modules.forEach((mod) => {
+          mod.w = colW;
+          mod.h = rowH - 8;
+          mod.homeX = pad * 2 + colW;
+          mod.homeY = 40 + mod.poolIdx * rowH;
+          if (mod.dockedSocket >= 0) {
+            const sock = APP_STATE.s3Sockets[mod.dockedSocket];
+            mod.x = sock.x;
+            mod.y = sock.y;
+          } else if (APP_STATE.dragTarget !== mod) {
+            mod.x = mod.homeX;
+            mod.y = mod.homeY;
+          }
+        });
+      } else {
+        const slotW = (w - pad * 5) / 4;
+        const slotH = Math.max(66, h * 0.24);
+        const topY = Math.max(52, h * 0.17);
+        const botY = h - slotH - Math.max(24, h * 0.12);
+        APP_STATE.s3Sockets = [0, 1, 2, 3].map((i) => ({
+          step: i + 1,
+          x: pad + i * (slotW + pad),
+          y: topY,
+          w: slotW,
+          h: slotH
+        }));
+        APP_STATE.s3Modules.forEach((mod) => {
+          mod.w = slotW;
+          mod.h = slotH;
+          mod.homeX = pad + mod.poolIdx * (slotW + pad);
+          mod.homeY = botY;
+          if (mod.dockedSocket >= 0) {
+            const sock = APP_STATE.s3Sockets[mod.dockedSocket];
+            mod.x = sock.x;
+            mod.y = sock.y;
+          } else if (APP_STATE.dragTarget !== mod) {
+            mod.x = mod.homeX;
+            mod.y = mod.homeY;
+          }
+        });
+      }
+    }
+
+    function layoutStage4() {
+      const w = APP_STATE.width;
+      const h = APP_STATE.height;
+      if (!w || !h) return;
+      const pad = Math.max(10, w * 0.03);
+      const btnH = Math.max(46, Math.min(58, h * 0.17));
+      const btnY = h - btnH - pad;
+      const btnW = (w - pad * 4) / 3;
+
+      APP_STATE.s4Buttons = [0, 1, 2].map((i) => ({
+        idx: i,
+        x: pad + i * (btnW + pad),
+        y: btnY,
+        w: btnW,
+        h: btnH
+      }));
+    }
+
+    function resizeCanvas() {
+      const rect = arenaEl.getBoundingClientRect();
+      APP_STATE.width = Math.max(280, rect.width);
+      APP_STATE.height = Math.max(200, rect.height);
+      APP_STATE.dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.floor(APP_STATE.width * APP_STATE.dpr);
+      canvas.height = Math.floor(APP_STATE.height * APP_STATE.dpr);
+      ctx.setTransform(APP_STATE.dpr, 0, 0, APP_STATE.dpr, 0, 0);
+
+      layoutStage1();
+      layoutStage2();
+      layoutStage3();
+      layoutStage4();
+    }
+
+    /* =========================================================================
+       5. CELEBRATION JUICE & STAGE COMPLETION
+       ========================================================================= */
+    function spawnParticles(x, y, color, count = 24) {
+      for (let i = 0; i < count; i++) {
+        const angle = (Math.PI * 2 * i) / count + Math.random() * 0.3;
+        const speed = 1.5 + Math.random() * 4.2;
+        APP_STATE.particles.push({
+          x,
+          y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed,
+          life: 1,
+          color,
+          size: 3 + Math.random() * 4.5
+        });
+      }
+    }
+
+    function spawnFloatingText(x, y, text, color = '#10B981') {
+      APP_STATE.floatingTexts.push({ x, y, text, color, life: 1 });
+    }
+
+    function completeCurrentStage() {
+      const idx = APP_STATE.currentStage;
+      if (!APP_STATE.solved[idx]) {
+        APP_STATE.solved[idx] = true;
+        APP_STATE.xp += 100;
+        playSuccessChime();
+        spawnParticles(APP_STATE.width * 0.5, APP_STATE.height * 0.45, COLORS.emerald, 50);
+        spawnFloatingText(APP_STATE.width * 0.5, APP_STATE.height * 0.4, '+100 XP!', '#FCD34D');
+      }
+      updateUI();
+      setTimeout(() => {
+        if (APP_STATE.solved[APP_STATE.currentStage]) {
+          winOverlay.classList.remove('hidden');
+        }
+      }, 650);
+    }
+
+    /* =========================================================================
+       6. CANVAS RENDERING ENGINE (4 ARCADE-INTERACTIVE MINI-GAMES)
+       ========================================================================= */
+    function drawRoundedRect(x, y, w, h, r) {
+      const rad = Math.min(r, w / 2, h / 2);
+      ctx.beginPath();
+      ctx.moveTo(x + rad, y);
+      ctx.arcTo(x + w, y, x + w, y + h, rad);
+      ctx.arcTo(x + w, y + h, x, y + h, rad);
+      ctx.arcTo(x, y + h, x, y, rad);
+      ctx.arcTo(x, y, x + w, y, rad);
+      ctx.closePath();
+    }
+
+    function getCanvasFont(weight, sizePx) {
+      const family = APP_STATE.lang === 'si' ? "'Noto Sans Sinhala', sans-serif" : "'Plus Jakarta Sans', sans-serif";
+      const scaled = APP_STATE.lang === 'si' ? Math.max(10, Math.round(sizePx * 0.92)) : Math.max(10, Math.round(sizePx));
+      return `${weight} ${scaled}px ${family}`;
+    }
+
+    function drawWrappedText(text, cx, cy, maxWidth, lineHeight) {
+      const words = text.split(' ');
+      let line = '';
+      const lines = [];
+      for (let n = 0; n < words.length; n++) {
+        const testLine = line + words[n] + ' ';
+        if (ctx.measureText(testLine).width > maxWidth && n > 0) {
+          lines.push(line.trim());
+          line = words[n] + ' ';
+        } else {
+          line = testLine;
+        }
+      }
+      lines.push(line.trim());
+      const startY = cy - ((lines.length - 1) * lineHeight) / 2;
+      lines.forEach((l, i) => {
+        ctx.fillText(l, cx, startY + i * lineHeight);
+      });
+    }
+
+    function renderStage1() {
+      const w = APP_STATE.width;
+      const h = APP_STATE.height;
+      const tStage = I18N[APP_STATE.lang].stages[0];
+      const leftBay = APP_STATE.s1Bays.left;
+      const rightBay = APP_STATE.s1Bays.right;
+      if (!leftBay || !rightBay) return;
+
+      const pillW = Math.min(144, (w - 36) / 3);
+      const pillH = Math.min(40, h * 0.13);
+      const arenaBottom = leftBay.y - pillH * 0.5 - 8;
+
+      // Update Zero-G drifting physics for undocked orbs
+      if (APP_STATE.started[0] && !APP_STATE.solved[0]) {
+        APP_STATE.s1Orbs.forEach((orb) => {
+          if (!orb.docked && APP_STATE.dragTarget !== orb) {
+            orb.x += orb.vx;
+            orb.y += orb.vy;
+            const minX = pillW * 0.5 + 8;
+            const maxX = w - pillW * 0.5 - 8;
+            const minY = 34 + pillH * 0.5;
+            if (orb.x < minX) { orb.x = minX; orb.vx *= -1; }
+            if (orb.x > maxX) { orb.x = maxX; orb.vx *= -1; }
+            if (orb.y < minY) { orb.y = minY; orb.vy *= -1; }
+            if (orb.y > arenaBottom) { orb.y = arenaBottom; orb.vy *= -1; }
+          }
+        });
+      }
+
+      // Top HUD: Docked Count + Combo Multiplier + Stability
+      const dockedCount = APP_STATE.s1Orbs.filter((o) => o.docked).length;
+      ctx.fillStyle = COLORS.sky;
+      ctx.font = getCanvasFont('800', Math.min(12.5, w * 0.032));
+      ctx.textAlign = 'left';
+      ctx.fillText(`${dockedCount}/6`, 14, 20);
+
+      ctx.fillStyle = APP_STATE.s1Combo > 1 ? COLORS.amber : COLORS.textMuted;
+      ctx.textAlign = 'center';
+      ctx.fillText(`${tStage.comboLbl}: ${APP_STATE.s1Combo}x`, w * 0.5, 20);
+
+      ctx.fillStyle = APP_STATE.s1Stability > 50 ? COLORS.emerald : COLORS.rose;
+      ctx.textAlign = 'right';
+      ctx.fillText(`${tStage.stabilityLbl}: ${APP_STATE.s1Stability}%`, w - 14, 20);
+
+      // Draw Magnetic Containment Bays
+      [
+        { rect: leftBay, title: tStage.leftBay, sub: tStage.leftSub, color: COLORS.amber, key: 'left' },
+        { rect: rightBay, title: tStage.rightBay, sub: tStage.rightSub, color: COLORS.emerald, key: 'right' }
+      ].forEach((b) => {
+        const isHighlighted = APP_STATE.selectedItem !== null;
+        drawRoundedRect(b.rect.x, b.rect.y, b.rect.w, b.rect.h, 14);
+        ctx.fillStyle = isHighlighted ? 'rgba(56, 189, 248, 0.14)' : 'rgba(30, 41, 59, 0.78)';
+        ctx.fill();
+        ctx.lineWidth = isHighlighted ? 2.5 : 1.6;
+        ctx.strokeStyle = b.color;
+        ctx.stroke();
+
+        ctx.fillStyle = b.color;
+        ctx.font = getCanvasFont('800', Math.min(13, b.rect.w * 0.085));
+        ctx.textAlign = 'center';
+        ctx.fillText(b.title, b.rect.x + b.rect.w * 0.5, b.rect.y + 20);
+
+        ctx.fillStyle = COLORS.textMuted;
+        ctx.font = getCanvasFont('500', Math.min(10.5, b.rect.w * 0.068));
+        ctx.fillText(b.sub, b.rect.x + b.rect.w * 0.5, b.rect.y + 34);
+      });
+
+      // Magnetic Tractor Beam when dragging or selected
+      const activeOrb = APP_STATE.dragTarget || APP_STATE.selectedItem;
+      if (activeOrb && !activeOrb.docked) {
+        const targetBay = activeOrb.x < w * 0.5 ? leftBay : rightBay;
+        ctx.beginPath();
+        ctx.moveTo(activeOrb.x, activeOrb.y);
+        ctx.lineTo(targetBay.x + targetBay.w * 0.5, targetBay.y + 12);
+        ctx.strokeStyle = 'rgba(56, 189, 248, 0.45)';
+        ctx.lineWidth = 3;
+        ctx.setLineDash([6, 4]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      // Draw Energy Orbs
+      APP_STATE.s1Orbs.forEach((orb) => {
+        if (orb.shake > 0) orb.shake -= 0.08;
+        const shakeX = orb.shake > 0 ? Math.sin(orb.shake * 28) * 6 : 0;
+        const label = tStage.items[orb.idx].label;
+        const isSelected = APP_STATE.selectedItem === orb;
+
+        if (orb.docked) {
+          drawRoundedRect(orb.x - pillW * 0.45, orb.y - 10, pillW * 0.9, 20, 6);
+          ctx.fillStyle = orb.bay === 'left' ? 'rgba(245, 158, 11, 0.24)' : 'rgba(16, 185, 129, 0.24)';
+          ctx.fill();
+          ctx.fillStyle = COLORS.textLight;
+          ctx.font = getCanvasFont('700', Math.min(11, pillW * 0.08));
+          ctx.textAlign = 'center';
+          ctx.fillText('⚡ ' + label, orb.x, orb.y + 4);
+        } else {
+          const drawX = orb.x + shakeX;
+          const drawY = orb.y;
+          drawRoundedRect(drawX - pillW / 2, drawY - pillH / 2, pillW, pillH, 12);
+          ctx.fillStyle = isSelected ? '#0284C7' : '#1E293B';
+          ctx.fill();
+          ctx.lineWidth = isSelected ? 2.8 : 1.6;
+          ctx.strokeStyle = isSelected ? '#7DD3FC' : COLORS.sky;
+          ctx.stroke();
+
+          ctx.fillStyle = COLORS.textLight;
+          ctx.font = getCanvasFont('700', Math.min(12, pillW * 0.095));
+          ctx.textAlign = 'center';
+          drawWrappedText(label, drawX, drawY + 4, pillW - 12, 13);
+        }
+      });
+    }
+
+    function computeVIEForce() {
+      const [e, i, v] = APP_STATE.s2Sliders;
+      const raw = (e / 100) * (i / 100) * (v / 100);
+      return Math.min(100, Math.round(Math.pow(raw, 0.48) * 105));
+    }
+
+    function renderStage2() {
+      const w = APP_STATE.width;
+      const tStage = I18N[APP_STATE.lang].stages[1];
+
+      // Subtle harmonic workplace turbulence unless user is actively holding slider
+      if (APP_STATE.started[1] && !APP_STATE.solved[1]) {
+        for (let i = 0; i < 3; i++) {
+          if (APP_STATE.s2ActiveSlider !== i) {
+            const drift = Math.sin(APP_STATE.pulseTime * (1.6 + i * 0.5) + i * 2) * 0.14;
+            APP_STATE.s2Sliders[i] = Math.max(15, Math.min(98, Number((APP_STATE.s2Sliders[i] + drift).toFixed(2))));
+          }
+        }
+      }
+
+      const force = computeVIEForce();
+      const inZone = force >= 70 && force <= 90;
+
+      if (inZone && APP_STATE.started[1] && !APP_STATE.solved[1]) {
+        APP_STATE.s2Charge = Math.min(100, APP_STATE.s2Charge + 0.85);
+        if (Math.floor(APP_STATE.s2Charge) % 25 === 0 && APP_STATE.s2Charge > 5) {
+          playTone(440 + APP_STATE.s2Charge * 3, 'sine', 0.08, 0.04);
+        }
+        if (APP_STATE.s2Charge >= 100) {
+          completeCurrentStage();
+        }
+      } else if (!APP_STATE.solved[1]) {
+        APP_STATE.s2Charge = Math.max(0, APP_STATE.s2Charge - 0.35);
+      }
+
+      const pad = Math.max(16, w * 0.05);
+      const barW = w - pad * 2;
+      const barY = 30;
+      const barH = 20;
+
+      // Top Force Readout
+      ctx.fillStyle = COLORS.textLight;
+      ctx.font = getCanvasFont('800', Math.min(12.5, w * 0.032));
+      ctx.textAlign = 'left';
+      ctx.fillText(`${tStage.gaugeLabel}: ${force}%`, pad, 20);
+
+      ctx.fillStyle = inZone ? COLORS.emerald : COLORS.amber;
+      ctx.textAlign = 'right';
+      ctx.font = getCanvasFont('700', Math.min(11.5, w * 0.03));
+      ctx.fillText(tStage.zoneHint, w - pad, 20);
+
+      // Force Gauge Track
+      drawRoundedRect(pad, barY, barW, barH, 10);
+      ctx.fillStyle = '#1E293B';
+      ctx.fill();
+
+      // Optimal Green Zone (70% to 90%)
+      const zStart = pad + barW * 0.70;
+      const zWidth = barW * 0.20;
+      ctx.fillStyle = 'rgba(16, 185, 129, 0.32)';
+      ctx.fillRect(zStart, barY, zWidth, barH);
+      ctx.strokeStyle = COLORS.emerald;
+      ctx.lineWidth = 2;
+      ctx.strokeRect(zStart, barY, zWidth, barH);
+
+      const fillColor = force > 90 ? COLORS.rose : inZone ? COLORS.emerald : COLORS.sky;
+      drawRoundedRect(pad, barY, Math.max(12, barW * (force / 100)), barH, 10);
+      ctx.fillStyle = fillColor;
+      ctx.fill();
+
+      // Capacitor Charge Bar
+      const capY = 58;
+      ctx.fillStyle = COLORS.textMuted;
+      ctx.font = getCanvasFont('700', Math.min(11, w * 0.028));
+      ctx.textAlign = 'left';
+      ctx.fillText(`${tStage.chargeLabel}: ${Math.round(APP_STATE.s2Charge)}%`, pad, capY + 11);
+
+      const capBarX = pad + Math.min(145, barW * 0.42);
+      const capBarW = barW - Math.min(145, barW * 0.42);
+      drawRoundedRect(capBarX, capY, capBarW, 14, 7);
+      ctx.fillStyle = '#0F172A';
+      ctx.fill();
+      drawRoundedRect(capBarX, capY, Math.max(8, capBarW * (APP_STATE.s2Charge / 100)), 14, 7);
+      ctx.fillStyle = COLORS.emerald;
+      ctx.fill();
+
+      // 3 Interactive Reactor Sliders
+      APP_STATE.s2Tracks.forEach((tr, idx) => {
+        const val = Math.round(APP_STATE.s2Sliders[idx]);
+        const sInfo = tStage.sliders[idx];
+
+        ctx.fillStyle = COLORS.textLight;
+        ctx.font = getCanvasFont('700', Math.min(12.5, w * 0.032));
+        ctx.textAlign = 'left';
+        ctx.fillText(`${sInfo.name} — ${val}%`, tr.x, tr.labelY);
+
+        drawRoundedRect(tr.x, tr.y - 6, tr.w, 12, 6);
+        ctx.fillStyle = '#1E293B';
+        ctx.fill();
+
+        drawRoundedRect(tr.x, tr.y - 6, tr.w * (val / 100), 12, 6);
+        ctx.fillStyle = inZone ? COLORS.emerald : COLORS.sky;
+        ctx.fill();
+
+        const knobX = tr.x + tr.w * (val / 100);
+        ctx.beginPath();
+        ctx.arc(knobX, tr.y, 13, 0, Math.PI * 2);
+        ctx.fillStyle = '#F8FAFC';
+        ctx.fill();
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = inZone ? COLORS.emerald : COLORS.sky;
+        ctx.stroke();
+      });
+    }
+
+    function renderStage3() {
+      const w = APP_STATE.width;
+      const tStage = I18N[APP_STATE.lang].stages[2];
+      APP_STATE.s3PulsePos = (APP_STATE.s3PulsePos + 0.025) % 1;
+
+      const lockedCount = APP_STATE.s3Modules.filter((m) => m.dockedSocket >= 0).length;
+      ctx.fillStyle = COLORS.sky;
+      ctx.font = getCanvasFont('800', Math.min(12.5, w * 0.032));
+      ctx.textAlign = 'center';
+      ctx.fillText(`${tStage.circuitLbl}: ${lockedCount * 25}%`, w * 0.5, 22);
+
+      // Draw Sockets
+      APP_STATE.s3Sockets.forEach((sock, idx) => {
+        const isHighlighted = APP_STATE.selectedItem !== null;
+        drawRoundedRect(sock.x, sock.y, sock.w, sock.h, 12);
+        ctx.fillStyle = isHighlighted ? 'rgba(56, 189, 248, 0.14)' : 'rgba(15, 23, 42, 0.88)';
+        ctx.fill();
+        ctx.setLineDash([5, 4]);
+        ctx.lineWidth = 1.8;
+        ctx.strokeStyle = isHighlighted ? COLORS.sky : COLORS.slateBorder;
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = COLORS.textMuted;
+        ctx.font = getCanvasFont('800', Math.min(13, sock.w * 0.11));
+        ctx.textAlign = 'center';
+        ctx.fillText(`#${idx + 1}`, sock.x + sock.w * 0.5, sock.y + sock.h * 0.55);
+      });
+
+      // Draw Live Traveling Energy Pulses along locked connectors
+      for (let i = 0; i < 3; i++) {
+        const sA = APP_STATE.s3Sockets[i];
+        const sB = APP_STATE.s3Sockets[i + 1];
+        const hasA = APP_STATE.s3Modules.some((m) => m.dockedSocket === i);
+        const hasB = APP_STATE.s3Modules.some((m) => m.dockedSocket === i + 1);
+        if (hasA && hasB && w >= 520) {
+          const x1 = sA.x + sA.w;
+          const y1 = sA.y + sA.h * 0.5;
+          const x2 = sB.x;
+          const y2 = sB.y + sB.h * 0.5;
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
+          ctx.strokeStyle = COLORS.emerald;
+          ctx.lineWidth = 3.5;
+          ctx.stroke();
+
+          const px = x1 + (x2 - x1) * APP_STATE.s3PulsePos;
+          ctx.beginPath();
+          ctx.arc(px, y1, 4.5, 0, Math.PI * 2);
+          ctx.fillStyle = '#FDE68A';
+          ctx.fill();
+        }
+      }
+
+      // Draw Modules
+      APP_STATE.s3Modules.forEach((mod) => {
+        if (mod.shake > 0) mod.shake -= 0.08;
+        const shakeX = mod.shake > 0 ? Math.sin(mod.shake * 28) * 6 : 0;
+        const isDocked = mod.dockedSocket >= 0;
+        const isSelected = APP_STATE.selectedItem === mod;
+        const nodeInfo = tStage.nodes[mod.stepIdx];
+
+        drawRoundedRect(mod.x + shakeX, mod.y, mod.w, mod.h, 12);
+        ctx.fillStyle = isDocked ? 'rgba(16, 185, 129, 0.24)' : isSelected ? '#0284C7' : '#1E293B';
+        ctx.fill();
+        ctx.lineWidth = isSelected ? 2.5 : 1.8;
+        ctx.strokeStyle = isDocked ? COLORS.emerald : isSelected ? '#7DD3FC' : COLORS.sky;
+        ctx.stroke();
+
+        ctx.fillStyle = COLORS.textLight;
+        ctx.font = getCanvasFont('700', Math.min(11.5, mod.w * 0.082));
+        ctx.textAlign = 'center';
+        drawWrappedText(nodeInfo.title, mod.x + shakeX + mod.w * 0.5, mod.y + mod.h * 0.38, mod.w - 12, 13);
+
+        ctx.fillStyle = isDocked ? '#A7F3D0' : COLORS.textMuted;
+        ctx.font = getCanvasFont('500', Math.min(9.5, mod.w * 0.068));
+        drawWrappedText(nodeInfo.sub, mod.x + shakeX + mod.w * 0.5, mod.y + mod.h * 0.74, mod.w - 12, 11);
+      });
+    }
+
+    function renderStage4() {
+      const w = APP_STATE.width;
+      const h = APP_STATE.height;
+      const tStage = I18N[APP_STATE.lang].stages[3];
+      const pad = Math.max(10, w * 0.03);
+      const gaugeH = Math.max(52, h * 0.18);
+      const deckY = APP_STATE.s4Buttons[0] ? APP_STATE.s4Buttons[0].y - 14 : h - 70;
+
+      // Recharge Energy & Spawn Crisis Parcels in Real-Time
+      if (APP_STATE.started[3] && !APP_STATE.solved[3]) {
+        APP_STATE.s4Energy = Math.min(100, APP_STATE.s4Energy + 0.18);
+        APP_STATE.s4SpawnTimer += 1;
+        if (APP_STATE.s4SpawnTimer > 78 && APP_STATE.s4Hazards.length < 4) {
+          APP_STATE.s4SpawnTimer = 0;
+          const typeIdx = Math.floor(Math.random() * 3);
+          const icons = ['⚠️', '📦', '⚖️'];
+          APP_STATE.s4Hazards.push({
+            typeIdx,
+            icon: icons[typeIdx],
+            x: pad + 26 + Math.random() * (w - pad * 2 - 52),
+            y: gaugeH + 34,
+            vy: 0.75 + Math.random() * 0.45
+          });
+        }
+
+        for (let i = APP_STATE.s4Hazards.length - 1; i >= 0; i--) {
+          const hz = APP_STATE.s4Hazards[i];
+          hz.y += hz.vy;
+          if (hz.y >= deckY) {
+            APP_STATE.s4Kpis[hz.typeIdx] = Math.max(25, APP_STATE.s4Kpis[hz.typeIdx] - 6);
+            spawnParticles(hz.x, deckY, COLORS.rose, 12);
+            APP_STATE.s4Hazards.splice(i, 1);
+          }
+        }
+      }
+
+      // Top Energy Bar
+      ctx.fillStyle = COLORS.amber;
+      ctx.font = getCanvasFont('800', Math.min(12, w * 0.03));
+      ctx.textAlign = 'center';
+      ctx.fillText(`⚡ ${tStage.budgetLbl}: ${Math.round(APP_STATE.s4Energy)}%`, w * 0.5, 18);
+
+      // 3 KPI Gauges
+      const gaugeW = (w - pad * 4) / 3;
+      const gaugeY = 26;
+      tStage.kpis.forEach((k, idx) => {
+        const gx = pad + idx * (gaugeW + pad);
+        const val = Math.round(APP_STATE.s4Kpis[idx]);
+        const ok = val >= k.target;
+
+        drawRoundedRect(gx, gaugeY, gaugeW, gaugeH, 10);
+        ctx.fillStyle = 'rgba(30, 41, 59, 0.88)';
+        ctx.fill();
+        ctx.lineWidth = 1.6;
+        ctx.strokeStyle = ok ? COLORS.emerald : COLORS.rose;
+        ctx.stroke();
+
+        ctx.fillStyle = COLORS.textLight;
+        ctx.font = getCanvasFont('700', Math.min(10.5, gaugeW * 0.095));
+        ctx.textAlign = 'center';
+        drawWrappedText(k.name, gx + gaugeW * 0.5, gaugeY + 15, gaugeW - 8, 11);
+
+        ctx.fillStyle = ok ? COLORS.emerald : COLORS.amber;
+        ctx.font = getCanvasFont('800', Math.min(13.5, gaugeW * 0.135));
+        ctx.fillText(`${val}% / ${k.target}%`, gx + gaugeW * 0.5, gaugeY + gaugeH - 9);
+      });
+
+      // Warehouse Conveyor Shield Line
+      ctx.beginPath();
+      ctx.moveTo(pad, deckY);
+      ctx.lineTo(w - pad, deckY);
+      ctx.strokeStyle = 'rgba(56, 189, 248, 0.35)';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([6, 4]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Falling Crisis Hazards
+      APP_STATE.s4Hazards.forEach((hz) => {
+        const badgeColors = [COLORS.rose, COLORS.amber, COLORS.purple];
+        ctx.beginPath();
+        ctx.arc(hz.x, hz.y, 16, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.92)';
+        ctx.fill();
+        ctx.lineWidth = 2.2;
+        ctx.strokeStyle = badgeColors[hz.typeIdx];
+        ctx.stroke();
+
+        ctx.font = '15px sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(hz.icon, hz.x, hz.y + 5);
+      });
+
+      // 3 Tactical Action Buttons
+      APP_STATE.s4Buttons.forEach((btn, idx) => {
+        const lever = tStage.levers[idx];
+        const canFire = APP_STATE.s4Energy >= lever.cost;
+        const accentColors = [COLORS.emerald, COLORS.sky, COLORS.amber];
+
+        drawRoundedRect(btn.x, btn.y, btn.w, btn.h, 11);
+        ctx.fillStyle = canFire ? 'rgba(30, 41, 59, 0.96)' : 'rgba(15, 23, 42, 0.6)';
+        ctx.fill();
+        ctx.lineWidth = canFire ? 2 : 1.2;
+        ctx.strokeStyle = canFire ? accentColors[idx] : COLORS.slateBorder;
+        ctx.stroke();
+
+        ctx.fillStyle = canFire ? COLORS.textLight : COLORS.textMuted;
+        ctx.font = getCanvasFont('800', Math.min(11, btn.w * 0.095));
+        ctx.textAlign = 'center';
+        drawWrappedText(lever.title, btn.x + btn.w * 0.5, btn.y + btn.h * 0.36, btn.w - 8, 12);
+
+        ctx.fillStyle = canFire ? accentColors[idx] : COLORS.textMuted;
+        ctx.font = getCanvasFont('700', Math.min(9.5, btn.w * 0.08));
+        ctx.fillText(`${lever.sub} (-${lever.cost})`, btn.x + btn.w * 0.5, btn.y + btn.h * 0.78);
+      });
+    }
+
+    function renderParticles() {
+      for (let i = APP_STATE.particles.length - 1; i >= 0; i--) {
+        const p = APP_STATE.particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life -= 0.025;
+        if (p.life <= 0) {
+          APP_STATE.particles.splice(i, 1);
+          continue;
+        }
+        ctx.globalAlpha = p.life;
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      for (let i = APP_STATE.floatingTexts.length - 1; i >= 0; i--) {
+        const ft = APP_STATE.floatingTexts[i];
+        ft.y -= 0.7;
+        ft.life -= 0.02;
+        if (ft.life <= 0) {
+          APP_STATE.floatingTexts.splice(i, 1);
+          continue;
+        }
+        ctx.globalAlpha = ft.life;
+        ctx.fillStyle = ft.color;
+        ctx.font = getCanvasFont('800', 14);
+        ctx.textAlign = 'center';
+        ctx.fillText(ft.text, ft.x, ft.y);
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    function gameLoop() {
+      APP_STATE.pulseTime += 0.016;
+      ctx.save();
+      if (APP_STATE.screenShake > 0) {
+        APP_STATE.screenShake -= 0.08;
+        const sx = (Math.random() - 0.5) * 8 * APP_STATE.screenShake;
+        const sy = (Math.random() - 0.5) * 8 * APP_STATE.screenShake;
+        ctx.translate(sx, sy);
+      }
+      ctx.clearRect(0, 0, APP_STATE.width, APP_STATE.height);
+
+      if (APP_STATE.currentStage === 0) renderStage1();
+      else if (APP_STATE.currentStage === 1) renderStage2();
+      else if (APP_STATE.currentStage === 2) renderStage3();
+      else if (APP_STATE.currentStage === 3) renderStage4();
+
+      renderParticles();
+      ctx.restore();
+      requestAnimationFrame(gameLoop);
+    }
+
+    /* =========================================================================
+       7. DUAL INPUT HANDLERS (DRAG + TWO-TAP INTERACTION ON CANVAS)
+       ========================================================================= */
+    function getPointerPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
+    }
+
+    function pointInRect(px, py, r) {
+      return px >= r.x && px <= r.x + r.w && py >= r.y && py <= r.y + r.h;
+    }
+
+    function tryDockOrb(orb, targetBayKey) {
+      if (orb.bay === targetBayKey) {
+        orb.docked = true;
+        APP_STATE.s1Combo += 1;
+        APP_STATE.selectedItem = null;
+        const bayRect = APP_STATE.s1Bays[targetBayKey];
+        playTone(440 + APP_STATE.s1Combo * 65, 'triangle', 0.14, 0.08);
+        spawnParticles(bayRect.x + bayRect.w / 2, bayRect.y + bayRect.h / 2, COLORS.emerald, 22);
+        spawnFloatingText(bayRect.x + bayRect.w / 2, bayRect.y, `${APP_STATE.s1Combo}x!`, COLORS.emerald);
+        layoutStage1();
+        if (APP_STATE.s1Orbs.every((o) => o.docked)) {
+          completeCurrentStage();
+        }
+      } else {
+        orb.shake = 1.0;
+        APP_STATE.s1Combo = 0;
+        APP_STATE.s1Stability = Math.max(40, APP_STATE.s1Stability - 15);
+        APP_STATE.screenShake = 0.7;
+        playErrorBuzz();
+        orb.x = orb.homeX;
+        orb.y = orb.homeY;
+        APP_STATE.selectedItem = null;
+      }
+    }
+
+    function tryDockModule(mod, socketIdx) {
+      const occupied = APP_STATE.s3Modules.some((m) => m.dockedSocket === socketIdx);
+      if (!occupied && mod.step === socketIdx + 1) {
+        mod.dockedSocket = socketIdx;
+        APP_STATE.selectedItem = null;
+        const sock = APP_STATE.s3Sockets[socketIdx];
+        playTone(390 + socketIdx * 90, 'triangle', 0.15, 0.09);
+        spawnParticles(sock.x + sock.w / 2, sock.y + sock.h / 2, COLORS.emerald, 22);
+        spawnFloatingText(sock.x + sock.w / 2, sock.y, '+25%', COLORS.emerald);
+        layoutStage3();
+        if (APP_STATE.s3Modules.every((m) => m.dockedSocket >= 0)) {
+          completeCurrentStage();
+        }
+      } else {
+        mod.shake = 1.0;
+        APP_STATE.screenShake = 0.7;
+        playErrorBuzz();
+        mod.x = mod.homeX;
+        mod.y = mod.homeY;
+        APP_STATE.selectedItem = null;
+      }
+    }
+
+    function handlePointerDown(e) {
+      if (e.cancelable) e.preventDefault();
+      const st = APP_STATE.currentStage;
+      if (!APP_STATE.started[st] || APP_STATE.solved[st]) return;
+
+      const { x, y } = getPointerPos(e);
+      APP_STATE.pointerX = x;
+      APP_STATE.pointerY = y;
+
+      if (st === 0) {
+        const pillW = Math.min(144, (APP_STATE.width - 36) / 3);
+        const pillH = Math.min(40, APP_STATE.height * 0.13);
+        for (let i = APP_STATE.s1Orbs.length - 1; i >= 0; i--) {
+          const orb = APP_STATE.s1Orbs[i];
+          if (!orb.docked && Math.abs(x - orb.x) <= pillW / 2 && Math.abs(y - orb.y) <= pillH / 2) {
+            APP_STATE.isDragging = true;
+            APP_STATE.dragTarget = orb;
+            APP_STATE.selectedItem = orb;
+            playTone(340, 'sine', 0.08, 0.05);
+            return;
+          }
+        }
+        if (APP_STATE.selectedItem) {
+          if (pointInRect(x, y, APP_STATE.s1Bays.left)) {
+            tryDockOrb(APP_STATE.selectedItem, 'left');
+          } else if (pointInRect(x, y, APP_STATE.s1Bays.right)) {
+            tryDockOrb(APP_STATE.selectedItem, 'right');
+          }
+        }
+      } else if (st === 1) {
+        APP_STATE.s2Tracks.forEach((tr, idx) => {
+          if (x >= tr.x - 16 && x <= tr.x + tr.w + 16 && Math.abs(y - tr.y) <= 24) {
+            APP_STATE.isDragging = true;
+            APP_STATE.s2ActiveSlider = idx;
+            const pct = Math.max(0, Math.min(100, Math.round(((x - tr.x) / tr.w) * 100)));
+            APP_STATE.s2Sliders[idx] = pct;
+            playTone(300 + pct * 3, 'sine', 0.06, 0.04);
+          }
+        });
+      } else if (st === 2) {
+        for (let i = APP_STATE.s3Modules.length - 1; i >= 0; i--) {
+          const mod = APP_STATE.s3Modules[i];
+          if (mod.dockedSocket < 0 && pointInRect(x, y, { x: mod.x, y: mod.y, w: mod.w, h: mod.h })) {
+            APP_STATE.isDragging = true;
+            APP_STATE.dragTarget = mod;
+            APP_STATE.selectedItem = mod;
+            playTone(360, 'sine', 0.08, 0.05);
+            return;
+          }
+        }
+        if (APP_STATE.selectedItem) {
+          APP_STATE.s3Sockets.forEach((sock, sIdx) => {
+            if (pointInRect(x, y, sock)) {
+              tryDockModule(APP_STATE.selectedItem, sIdx);
+            }
+          });
+        }
+      } else if (st === 3) {
+        const levers = I18N.en.stages[3].levers;
+        APP_STATE.s4Buttons.forEach((btn, idx) => {
+          if (pointInRect(x, y, btn)) {
+            const cost = levers[idx].cost;
+            if (APP_STATE.s4Energy >= cost) {
+              APP_STATE.s4Energy -= cost;
+              playTone(480 + idx * 80, 'triangle', 0.14, 0.08);
+              spawnParticles(btn.x + btn.w * 0.5, btn.y, COLORS.emerald, 18);
+
+              // Boost KPIs based on Kasun Silva's HR interventions
+              if (idx === 0) {
+                APP_STATE.s4Kpis[0] = Math.min(100, APP_STATE.s4Kpis[0] + 18);
+                APP_STATE.s4Kpis[1] = Math.min(100, APP_STATE.s4Kpis[1] + 9);
+              } else if (idx === 1) {
+                APP_STATE.s4Kpis[2] = Math.min(100, APP_STATE.s4Kpis[2] + 18);
+                APP_STATE.s4Kpis[0] = Math.min(100, APP_STATE.s4Kpis[0] + 8);
+              } else if (idx === 2) {
+                APP_STATE.s4Kpis[1] = Math.min(100, APP_STATE.s4Kpis[1] + 18);
+                APP_STATE.s4Kpis[2] = Math.min(100, APP_STATE.s4Kpis[2] + 8);
+              }
+
+              // Neutralize matching falling hazard if active
+              const matchIdx = APP_STATE.s4Hazards.findIndex((hz) => hz.typeIdx === idx);
+              if (matchIdx >= 0) {
+                const hz = APP_STATE.s4Hazards[matchIdx];
+                spawnParticles(hz.x, hz.y, COLORS.sky, 16);
+                spawnFloatingText(hz.x, hz.y, 'SHIELDED!', COLORS.sky);
+                APP_STATE.s4Hazards.splice(matchIdx, 1);
+              }
+
+              const [safety, quality, equity] = APP_STATE.s4Kpis;
+              if (safety >= 75 && quality >= 80 && equity >= 75) {
+                completeCurrentStage();
+              }
+            } else {
+              playErrorBuzz();
+            }
+          }
+        });
+      }
+    }
+
+    function handlePointerMove(e) {
+      if (!APP_STATE.isDragging) return;
+      if (e.cancelable) e.preventDefault();
+      const { x, y } = getPointerPos(e);
+      const st = APP_STATE.currentStage;
+
+      if (st === 0 && APP_STATE.dragTarget) {
+        APP_STATE.dragTarget.x = x;
+        APP_STATE.dragTarget.y = y;
+      } else if (st === 1 && APP_STATE.s2ActiveSlider >= 0) {
+        const tr = APP_STATE.s2Tracks[APP_STATE.s2ActiveSlider];
+        const pct = Math.max(0, Math.min(100, Math.round(((x - tr.x) / tr.w) * 100)));
+        APP_STATE.s2Sliders[APP_STATE.s2ActiveSlider] = pct;
+      } else if (st === 2 && APP_STATE.dragTarget) {
+        APP_STATE.dragTarget.x = x - APP_STATE.dragTarget.w / 2;
+        APP_STATE.dragTarget.y = y - APP_STATE.dragTarget.h / 2;
+      }
+    }
+
+    function handlePointerUp(e) {
+      if (!APP_STATE.isDragging) return;
+      if (e.cancelable) e.preventDefault();
+      const st = APP_STATE.currentStage;
+
+      if (st === 0 && APP_STATE.dragTarget) {
+        const orb = APP_STATE.dragTarget;
+        if (pointInRect(orb.x, orb.y, APP_STATE.s1Bays.left)) {
+          tryDockOrb(orb, 'left');
+        } else if (pointInRect(orb.x, orb.y, APP_STATE.s1Bays.right)) {
+          tryDockOrb(orb, 'right');
+        } else {
+          orb.x = orb.homeX;
+          orb.y = orb.homeY;
+        }
+      } else if (st === 2 && APP_STATE.dragTarget) {
+        const mod = APP_STATE.dragTarget;
+        const cx = mod.x + mod.w / 2;
+        const cy = mod.y + mod.h / 2;
+        let matched = -1;
+        APP_STATE.s3Sockets.forEach((sock, idx) => {
+          if (pointInRect(cx, cy, sock)) matched = idx;
+        });
+        if (matched >= 0) {
+          tryDockModule(mod, matched);
+        } else {
+          mod.x = mod.homeX;
+          mod.y = mod.homeY;
+        }
+      }
+
+      APP_STATE.isDragging = false;
+      APP_STATE.dragTarget = null;
+      APP_STATE.s2ActiveSlider = -1;
+    }
+
+    canvas.addEventListener('pointerdown', handlePointerDown);
+    canvas.addEventListener('pointermove', handlePointerMove);
+    canvas.addEventListener('pointerup', handlePointerUp);
+    canvas.addEventListener('touchstart', handlePointerDown, { passive: false });
+    canvas.addEventListener('touchmove', handlePointerMove, { passive: false });
+    canvas.addEventListener('touchend', handlePointerUp, { passive: false });
+
+    /* =========================================================================
+       7. UI SYNCHRONIZATION & BILINGUAL RE-RENDERING
+       ========================================================================= */
+    function updateUI() {
+      const t = I18N[APP_STATE.lang];
+      const st = APP_STATE.currentStage;
+      const stageData = t.stages[st];
+      const solvedCount = APP_STATE.solved.filter(Boolean).length;
+      const allCleared = solvedCount === 4;
+
+      document.body.classList.toggle('lang-si', APP_STATE.lang === 'si');
+      document.getElementById('uiBrandBadge').textContent = t.brandBadge;
+      document.getElementById('uiModuleTag').textContent = t.moduleTag;
+      document.getElementById('uiFooter').textContent = t.footer;
+      document.getElementById('uiXpValue').textContent = APP_STATE.xp;
+
+      const badgeBtn = document.getElementById('uiBadgeBtn');
+      document.getElementById('uiBadgeText').textContent = `${solvedCount}/4`;
+      badgeBtn.classList.toggle('unlocked', allCleared);
+      badgeBtn.title = allCleared ? t.badgeTooltipUnlocked : t.badgeTooltipLocked;
+
+      document.getElementById('openBadgeQuickBtn').style.display = allCleared ? 'inline-block' : 'none';
+      document.getElementById('openBadgeQuickBtn').textContent = t.claimBtn;
+
+      document.getElementById('uiMasteryProgressLbl').textContent = t.masteryProgressLbl;
+      document.getElementById('uiMasteryProgressVal').textContent = t.masteryProgressVal(solvedCount);
+      document.getElementById('uiMasteryProgressBar').style.width = `${solvedCount * 25}%`;
+
+      // Stage Pills
+      document.querySelectorAll('.stage-pill').forEach((pill, idx) => {
+        pill.classList.toggle('active', idx === st);
+        pill.classList.toggle('completed', APP_STATE.solved[idx]);
+        const lbl = pill.querySelector('.pill-label');
+        if (lbl) lbl.textContent = t.pills[idx].replace(/^\d+\.\s*/, '');
+      });
+
+      // Overlays
+      document.getElementById('ovEyebrow').textContent = t.stageOf(st + 1);
+      document.getElementById('ovTitle').textContent = stageData.title;
+      document.getElementById('ovDesc').textContent = stageData.overlayDesc;
+      document.getElementById('startActivityBtn').textContent = t.startBtn;
+
+      document.getElementById('winEyebrow').textContent = t.winEyebrow;
+      document.getElementById('winTitle').textContent = t.winTitle;
+      document.getElementById('winDesc').textContent = stageData.winDesc;
+      document.getElementById('nextStageBtn').textContent = st < 3 ? t.nextBtn : t.claimBtn;
+
+      startOverlay.classList.toggle('hidden', APP_STATE.started[st]);
+      winOverlay.classList.toggle('hidden', !APP_STATE.solved[st]);
+
+      // Mission & Theory Card
+      document.getElementById('uiArchetype').textContent = stageData.archetype;
+      const statusEl = document.getElementById('uiStageStatus');
+      statusEl.textContent = APP_STATE.solved[st] ? t.statusSolved(st + 1) : t.statusActive(st + 1);
+      statusEl.classList.toggle('solved', APP_STATE.solved[st]);
+
+      document.getElementById('uiMissionTitle').textContent = stageData.title;
+      document.getElementById('uiMissionDesc').textContent = stageData.missionDesc;
+      document.getElementById('uiControlHint').textContent = stageData.controlHint;
+      document.getElementById('resetStageBtn').textContent = t.resetBtn;
+
+      document.getElementById('uiVaultTitle').textContent = t.vaultTitle;
+      document.getElementById('uiVaultBody').textContent = stageData.vaultBody;
+      document.getElementById('uiVaultFormula').textContent = stageData.vaultFormula;
+      document.getElementById('uiVaultCase').textContent = stageData.vaultCase;
+
+      // Modal Text
+      document.getElementById('certTvec').textContent = t.certTvec;
+      document.getElementById('certAwardedTo').textContent = t.certAwardedTo;
+      document.getElementById('certModuleName').textContent = t.certModuleName;
+      document.getElementById('certTrackLbl').textContent = t.certTrackLbl;
+      document.getElementById('certScoreLbl').textContent = t.certScoreLbl;
+      document.getElementById('certDateLbl').textContent = t.certDateLbl;
+      document.getElementById('certFinalXp').textContent = APP_STATE.xp;
+      document.getElementById('certDateVal').textContent = new Date().toLocaleDateString();
+      document.getElementById('studentNameInput').placeholder = t.namePlaceholder;
+      document.getElementById('printBadgeBtn').textContent = t.printBtn;
+      document.getElementById('closeModalBtn').textContent = t.closeBtn;
+    }
+
+    function switchStage(idx) {
+      APP_STATE.currentStage = idx;
+      initStageState(idx, false);
+      updateUI();
+    }
+
+    /* =========================================================================
+       8. EVENT LISTENERS & BOOTSTRAP
+       ========================================================================= */
+    document.getElementById('uiLangToggle').addEventListener('click', () => {
+      APP_STATE.lang = APP_STATE.lang === 'en' ? 'si' : 'en';
+      updateUI();
+    });
+
+    document.getElementById('startActivityBtn').addEventListener('click', () => {
+      APP_STATE.started[APP_STATE.currentStage] = true;
+      initStageState(APP_STATE.currentStage, false);
+      playTone(440, 'triangle', 0.12, 0.07);
+      updateUI();
+    });
+
+    document.getElementById('nextStageBtn').addEventListener('click', () => {
+      if (APP_STATE.currentStage < 3) {
+        switchStage(APP_STATE.currentStage + 1);
+      } else {
+        openBadgeModal();
+      }
+    });
+
+    document.getElementById('resetStageBtn').addEventListener('click', () => {
+      const st = APP_STATE.currentStage;
+      APP_STATE.solved[st] = false;
+      APP_STATE.started[st] = true;
+      initStageState(st, true);
+      updateUI();
+    });
+
+    document.querySelectorAll('.stage-pill').forEach((pill) => {
+      pill.addEventListener('click', () => {
+        const idx = Number(pill.getAttribute('data-stage'));
+        switchStage(idx);
+      });
+    });
+
+    document.getElementById('vaultToggleBtn').addEventListener('click', () => {
+      APP_STATE.vaultOpen = !APP_STATE.vaultOpen;
+      document.getElementById('vaultContent').classList.toggle('open', APP_STATE.vaultOpen);
+      document.getElementById('vaultArrow').textContent = APP_STATE.vaultOpen ? '▲' : '▼';
+    });
+
+    function openBadgeModal() {
+      const solvedCount = APP_STATE.solved.filter(Boolean).length;
+      if (solvedCount < 4) {
+        showToast(I18N[APP_STATE.lang].badgeTooltipLocked);
+        return;
+      }
+      updateUI();
+      badgeModal.classList.remove('hidden');
+    }
+
+    document.getElementById('uiBadgeBtn').addEventListener('click', openBadgeModal);
+    document.getElementById('openBadgeQuickBtn').addEventListener('click', openBadgeModal);
+    document.getElementById('closeModalBtn').addEventListener('click', () => {
+      badgeModal.classList.add('hidden');
+    });
+
+    document.getElementById('studentNameInput').addEventListener('input', (e) => {
+      const val = e.target.value.trim();
+      document.getElementById('certDisplayName').textContent = val || 'OBISL Scholar';
+    });
+
+    document.getElementById('printBadgeBtn').addEventListener('click', () => {
+      window.print();
+    });
+
+    window.addEventListener('resize', resizeCanvas);
+
+    // Initialize App
+    resizeCanvas();
+    initStageState(0, true);
+    updateUI();
+    requestAnimationFrame(gameLoop);
+  </script>
+</body>
+</html>
